@@ -25,3 +25,6 @@
 
 ## 1.0.9+10
 * New Release
+
+## 1.0.10+11
+* New Release
