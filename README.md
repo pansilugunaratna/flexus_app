@@ -52,4 +52,4 @@ This project can be an starting point for any Flutter application. Supports Flut
 
 
 ## Bugs and Comments
-To report bugs and comment on the base app please contact me (dilan@dilan.me)
+To report bugs or comments on this app or if you are looking to create an Flutter app based on this app please contact me (dilan@dilan.me)
