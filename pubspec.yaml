@@ -18,7 +18,7 @@ dependencies:
   #Dev
   flutter_riverpod: ^2.1.3
   riverpod_annotation: ^1.1.1
-  go_router: ^6.0.3
+  go_router: ^6.0.5
   easy_localization: ^3.0.1
   logger: ^1.1.0
   easy_logger: ^0.0.2
@@ -56,27 +56,27 @@ dependencies:
   #Extension Firebase
 
   #Firebase Core
-  firebase_core: ^2.4.1
+  firebase_core: ^2.5.0
 
   #Firebase Auth
-  firebase_auth: ^4.2.5
+  firebase_auth: ^4.2.6
   crypto: ^3.0.2
   google_sign_in: ^5.4.4
   flutter_facebook_auth: ^5.0.7
   sign_in_with_apple: ^4.3.0
-  cloud_firestore: ^4.3.1
-  firebase_storage: ^11.0.10
+  cloud_firestore: ^4.3.2
+  firebase_storage: ^11.0.11
   
   #Firebase Analytics
-  firebase_analytics: ^10.1.0
+  firebase_analytics: ^10.1.1
 
   #Firebase Others
-  firebase_crashlytics: ^3.0.11
-  firebase_remote_config: ^3.0.9
-  firebase_performance: ^0.9.0+10
+  firebase_crashlytics: ^3.0.12
+  firebase_remote_config: ^3.0.10
+  firebase_performance: ^0.9.0+11
 
   #Firebase testing
-  firebase_core_platform_interface: ^4.5.2
+  firebase_core_platform_interface: ^4.5.3
  
 dev_dependencies:
   integration_test:
