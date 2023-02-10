@@ -50,6 +50,18 @@ Use of Riverpod as a statemanagement library
 
 This project can be an starting point for any Flutter application. Supports Flutter 3.7
 
+##Get Started
+1. Add follwing to your local properties files in Android Folder
+
+```
+flutter.targetSdkVersion=33
+flutter.compileSdkVersion=33
+flutter.minSdkVersion=26
+```
+
+2. Create and Firebase project and add Enable Email, Google Sign in autentications
+3. Create Firebase cloud store database
+
 
 ## Bugs and Comments
 To report bugs or comments on this app or if you are looking to create an Flutter app based on this app please contact me (dilan@dilan.me)
