@@ -8,13 +8,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../configs/routes.dart';
-import '../../app/repositories/data_repo.dart';
+import '../../app/repositories/data/repo.dart';
 import '../../base/core/events.dart';
 import '../../base/generated/assets/assets.gen.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
-import '../../extensions/widgets/app_page.dart';
 import '../../configs/configs.dart';
 import '../../configs/theme.dart';
+import '../../extensions/providers/firebase/auth/provider.dart';
+import '../../extensions/widgets/app_page.dart';
 
 class SplashPage extends ConsumerWidget {
   const SplashPage({super.key});

@@ -4,10 +4,10 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../models/posts/posts.dart';
+import '../../models/posts/posts.dart';
 import 'data_repo_impl.dart';
 
-part '../../base/generated/lib/app/repositories/data_repo.g.dart';
+part '../../../base/generated/lib/app/repositories/data/repo.g.dart';
 
 @Riverpod(keepAlive: true)
 DataRepo dataRepo(DataRepoRef ref) => DataRepoImpl(ref);

@@ -2,9 +2,9 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
-import '../models/posts/posts.dart';
-import '../pb/client.dart';
-import 'data_repo.dart';
+import '../../models/posts/posts.dart';
+import '../../pb/client.dart';
+import 'repo.dart';
 
 class DataRepoImpl implements DataRepo {
   DataRepoImpl(this.ref);

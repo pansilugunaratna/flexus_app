@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../app/repositories/data_repo.dart';
+part of '../../../../../../app/repositories/data/repo.dart';
 
 // **************************************************************************
 // RiverpodGenerator
