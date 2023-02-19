@@ -11,8 +11,8 @@ import '../../../configs/routes.dart';
 import '../../app/repositories/data_repo.dart';
 import '../../base/core/events.dart';
 import '../../base/generated/assets/assets.gen.dart';
-import '../../base/providers/firebase/auth/provider.dart';
-import '../../base/widgets/app_page.dart';
+import '../../extensions/providers/firebase/auth/provider.dart';
+import '../../extensions/widgets/app_page.dart';
 import '../../configs/configs.dart';
 import '../../configs/theme.dart';
 

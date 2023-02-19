@@ -10,11 +10,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../configs/routes.dart';
 import '../generated/locale/locale_keys.g.dart';
-import '../providers/dialogs/common/provider.dart';
-import '../providers/firebase/analytics/provider.dart';
-import '../providers/firebase/auth/models/auth_user.dart';
-import '../providers/firebase/auth/provider.dart';
-import '../providers/firebase/user/provider.dart';
+import '../../extensions/providers/dialogs/common/provider.dart';
+import '../../extensions/providers/firebase/analytics/provider.dart';
+import '../../extensions/providers/firebase/auth/models/auth_user.dart';
+import '../../extensions/providers/firebase/auth/provider.dart';
+import '../../extensions/providers/firebase/user/provider.dart';
 import 'user.dart';
 
 part '../generated/lib/base/core/events.g.dart';

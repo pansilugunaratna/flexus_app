@@ -37,7 +37,7 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Posts.fromMap(_result.data!);
+    final value = Posts.fromJson(_result.data!);
     return value;
   }
 

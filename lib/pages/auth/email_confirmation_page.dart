@@ -11,12 +11,12 @@ import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../base/generated/assets/assets.gen.dart';
 import '../../base/generated/locale/locale_keys.g.dart';
-import '../../base/providers/dialogs/common/provider.dart';
-import '../../base/providers/firebase/auth/provider.dart';
-import '../../base/widgets/app_page.dart';
 import '../../configs/logger.dart';
 import '../../configs/routes.dart';
 import '../../configs/theme.dart';
+import '../../extensions/providers/dialogs/common/provider.dart';
+import '../../extensions/providers/firebase/auth/provider.dart';
+import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_button.dart';
 
 final _isLoading = StateProvider<bool>((ref) => false);

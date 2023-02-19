@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../base/generated/locale/locale_keys.g.dart';
-import '../../base/providers/firebase/analytics/provider.dart';
-import '../../base/widgets/app_page.dart';
+import '../../extensions/providers/firebase/analytics/provider.dart';
+import '../../extensions/widgets/app_page.dart';
 import 'widgets/home_drawer.dart';
 
 class HomePage extends ConsumerWidget {

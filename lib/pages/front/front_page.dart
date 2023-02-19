@@ -10,10 +10,10 @@ import 'package:sizer/sizer.dart';
 
 import '../../base/generated/assets/assets.gen.dart';
 import '../../base/generated/locale/locale_keys.g.dart';
-import '../../base/providers/firebase/analytics/provider.dart';
-import '../../base/widgets/app_page.dart';
 import '../../configs/routes.dart';
 import '../../configs/theme.dart';
+import '../../extensions/providers/firebase/analytics/provider.dart';
+import '../../extensions/widgets/app_page.dart';
 import '../auth/widgets/auth_button.dart';
 
 class FrontPage extends ConsumerWidget {

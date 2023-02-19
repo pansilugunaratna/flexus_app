@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../base/providers/firebase/auth/login_type.dart';
+import '../../../extensions/providers/firebase/auth/login_type.dart';
 
 class SocialAuthButton extends ConsumerWidget {
   const SocialAuthButton(this.loginType, this.onPressed, {super.key});
