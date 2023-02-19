@@ -15,7 +15,7 @@ import '../../configs/logger.dart';
 import '../../configs/routes.dart';
 import '../../configs/theme.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
+import '../../extensions/repo/auth/auth_repo.dart';
 import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_button.dart';
 
@@ -68,9 +68,8 @@ class EmailConfirmationPage extends ConsumerWidget {
 
 _verifyEmail(
     GlobalKey<FormBuilderState> formKey, BuildContext context, WidgetRef ref) {
-  final firebaseAuth = ref.read(firebaseAuthProvider);
   ref.read(_isLoading.notifier).state = true;
-  firebaseAuth.isEmailVerified().then((isVerified) {
+  ref.read(authRepoProvider).isEmailVerified().then((isVerified) {
     if (isVerified) {
       ref.read(_isLoading.notifier).state = false;
       ref.read(dialogsProvider).showOKDialog(context,

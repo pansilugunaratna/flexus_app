@@ -5,12 +5,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/posts/posts.dart';
-import 'data_repo_impl.dart';
+import 'pb_data_repo.dart';
 
-part '../../../base/generated/lib/app/repositories/data/repo.g.dart';
+part '../../../base/generated/lib/app/repo/data/data_repo.g.dart';
 
 @Riverpod(keepAlive: true)
-DataRepo dataRepo(DataRepoRef ref) => DataRepoImpl(ref);
+DataRepo dataRepo(DataRepoRef ref) => PBDataRepo(ref);
 
 abstract class DataRepo {
   Future<void> initiate();

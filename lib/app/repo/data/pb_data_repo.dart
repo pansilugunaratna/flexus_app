@@ -2,14 +2,16 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../models/posts/posts.dart';
 import '../../pb/client.dart';
-import 'repo.dart';
+import 'data_repo.dart';
 
-class DataRepoImpl implements DataRepo {
-  DataRepoImpl(this.ref);
+class PBDataRepo implements DataRepo {
+  PBDataRepo(this.ref);
 
-  final DataRepoRef ref;
+  final ProviderRef ref;
 
   @override
   Future<void> initiate() async {
