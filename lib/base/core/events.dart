@@ -9,12 +9,12 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../configs/routes.dart';
-import '../generated/locale/locale_keys.g.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
-import '../../extensions/providers/firebase/auth/models/auth_user.dart';
 import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
+import '../../extensions/repos/auth/classes/auth_user.dart';
+import '../generated/locale/locale_keys.g.dart';
 import 'user.dart';
 
 part '../generated/lib/base/core/events.g.dart';

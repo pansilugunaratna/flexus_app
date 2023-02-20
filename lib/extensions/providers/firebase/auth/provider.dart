@@ -20,8 +20,8 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../../base/generated/locale/locale_keys.g.dart';
 import '../../../../configs/configs.dart';
 import '../../../../configs/logger.dart';
-import 'login_type.dart';
-import 'models/auth_user.dart';
+import '../../../repos/auth/classes/auth_user.dart';
+import '../../../repos/auth/classes/login_type.dart';
 import 'user_not_found_exception.dart';
 
 part '../../../../base/generated/lib/extensions/providers/firebase/auth/provider.g.dart';

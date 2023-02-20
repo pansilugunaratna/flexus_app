@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../configs/logger.dart';
 import '../../../../base/core/user.dart';
-import '../auth/models/auth_user.dart';
+import '../../../repos/auth/classes/auth_user.dart';
 
 part '../../../../base/generated/lib/extensions/providers/firebase/user/provider.g.dart';
 
