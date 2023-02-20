@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../../extensions/repo/auth/auth_repo.dart';
+part of '../../../../../../extensions/repos/auth/auth_repo.dart';
 
 // **************************************************************************
 // RiverpodGenerator

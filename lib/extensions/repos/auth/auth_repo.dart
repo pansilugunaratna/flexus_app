@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'firebase_auth_repo.dart';
 
-part '../../../base/generated/lib/extensions/repo/auth/auth_repo.g.dart';
+part '../../../base/generated/lib/extensions/repos/auth/auth_repo.g.dart';
 
 @Riverpod(keepAlive: true)
 AuthRepo authRepo(AuthRepoRef ref) => FirebaseAuthRepo(ref);
