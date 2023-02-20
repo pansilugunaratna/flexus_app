@@ -15,6 +15,7 @@ import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
 import '../../extensions/repos/auth/classes/auth_user.dart';
 import '../generated/locale/locale_keys.g.dart';
+import '../providers/auth/auth_user_info.dart';
 import 'user.dart';
 
 part '../generated/lib/base/core/events.g.dart';

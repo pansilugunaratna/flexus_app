@@ -4,8 +4,8 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'classes/login_type.dart';
 import 'classes/auth_user.dart';
+import 'classes/login_type.dart';
 import 'impl/firebase_auth_repo.dart';
 
 part '../../../base/generated/lib/extensions/repos/auth/auth_repo.g.dart';
@@ -19,4 +19,5 @@ abstract class AuthRepo {
   Future<AuthUser> signInWithSocialLogin(LoginType loginType);
   Future<AuthUser> signInWithEmail(String email, String password);
   Future<AuthUser> signUpWithEmail(String name, String email, String password);
+  Future<void> resetPassword(String email);
 }

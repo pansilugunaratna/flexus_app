@@ -101,15 +101,12 @@ class FirebaseAuthProvider {
     }
   }
 
-  Future<void> resetPassword(BuildContext context, WidgetRef ref, String email,
-      {required Function resetSuccess, required Function resetFailed}) async {
+  Future<void> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      resetSuccess();
     } on FirebaseAuthException catch (exception) {
       Log.log.w(exception.toString());
       _handleFirebaseException(exception);
-      resetFailed();
     }
   }
 

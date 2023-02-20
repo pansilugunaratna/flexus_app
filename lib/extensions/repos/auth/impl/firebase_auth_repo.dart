@@ -4,10 +4,10 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../classes/login_type.dart';
-import '../classes/auth_user.dart';
 import '../../../providers/firebase/auth/provider.dart';
 import '../auth_repo.dart';
+import '../classes/auth_user.dart';
+import '../classes/login_type.dart';
 
 class FirebaseAuthRepo implements AuthRepo {
   FirebaseAuthRepo(this.ref);
@@ -42,5 +42,10 @@ class FirebaseAuthRepo implements AuthRepo {
     return await ref
         .read(firebaseAuthProvider)
         .signUpWithEmail(name, email, password);
+  }
+
+  @override
+  Future<void> resetPassword(String email) async {
+    await ref.read(firebaseAuthProvider).resetPassword(email);
   }
 }

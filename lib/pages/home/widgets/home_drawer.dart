@@ -8,9 +8,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import '../../../base/core/events.dart';
 import '../../../base/generated/assets/assets.gen.dart';
 import '../../../base/generated/locale/locale_keys.g.dart';
+import '../../../base/providers/auth/auth_user_info.dart';
 import '../../../configs/routes.dart';
 import '../../../extensions/providers/ui/circular_avatar.dart';
-import '../../../extensions/repos/auth/classes/auth_user.dart';
 import '../../auth/profile_page.dart';
 
 class HomeDrawer extends ConsumerWidget {

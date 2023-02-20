@@ -15,16 +15,16 @@ import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../base/core/user.dart';
 import '../../base/generated/locale/locale_keys.g.dart';
+import '../../base/providers/auth/auth_user_info.dart';
 import '../../configs/logger.dart';
 import '../../configs/theme.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
-import '../../extensions/repos/auth/classes/login_type.dart';
-import '../../extensions/repos/auth/classes/auth_user.dart';
 import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
 import '../../extensions/providers/ui/circular_avatar.dart';
 import '../../extensions/providers/ui/provider.dart';
+import '../../extensions/repos/auth/classes/login_type.dart';
 import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_dropdown.dart';
 import 'widgets/auth_text_box.dart';
