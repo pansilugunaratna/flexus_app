@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../base/core/user.dart';
-import '../../../../base/providers/auth/auth_user_info.dart';
+import '../../../../base/providers/app/auth_user_info.dart';
 import '../../../../configs/logger.dart';
 
 part '../../../../base/generated/lib/extensions/providers/firebase/user/provider.g.dart';

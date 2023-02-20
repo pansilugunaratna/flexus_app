@@ -1,24 +1,19 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const appName = 'appName';
   static const homePageWelcome = 'homePageWelcome';
   static const appWelcomeMessage = 'appWelcomeMessage';
   static const authErrors_noUserFound = 'authErrors.noUserFound';
   static const authErrors_wrongPassword = 'authErrors.wrongPassword';
   static const authErrors_weakPassword = 'authErrors.weakPassword';
-  static const authErrors_accountAlreadyExist =
-      'authErrors.accountAlreadyExist';
-  static const authErrors_accountExistWithSameEmail =
-      'authErrors.accountExistWithSameEmail';
+  static const authErrors_accountAlreadyExist = 'authErrors.accountAlreadyExist';
+  static const authErrors_accountExistWithSameEmail = 'authErrors.accountExistWithSameEmail';
   static const authErrors_signInFailure = 'authErrors.signInFailure';
-  static const authErrors_resetPasswordFailed =
-      'authErrors.resetPasswordFailed';
+  static const authErrors_resetPasswordFailed = 'authErrors.resetPasswordFailed';
   static const authErrors_googleSignInFailed = 'authErrors.googleSignInFailed';
-  static const authErrors_facebookSignInFailed =
-      'authErrors.facebookSignInFailed';
-  static const authErrors_facebookSignInCanceled =
-      'authErrors.facebookSignInCanceled';
+  static const authErrors_facebookSignInFailed = 'authErrors.facebookSignInFailed';
+  static const authErrors_facebookSignInCanceled = 'authErrors.facebookSignInCanceled';
   static const authErrors_tooManyRequests = 'authErrors.tooManyRequests';
   static const authErrors_unauthorized = 'authErrors.unauthorized';
   static const authErrors = 'authErrors';
@@ -53,13 +48,11 @@ abstract class LocaleKeys {
   static const auth_email = 'auth.email';
   static const auth_password = 'auth.password';
   static const auth_confirmPassword = 'auth.confirmPassword';
-  static const auth_confirmPasswordNotMatching =
-      'auth.confirmPasswordNotMatching';
+  static const auth_confirmPasswordNotMatching = 'auth.confirmPasswordNotMatching';
   static const auth_emailVerification = 'auth.emailVerification';
   static const auth_verifyEmail = 'auth.verifyEmail';
   static const auth_iHaveVerifiedMyEmail = 'auth.iHaveVerifiedMyEmail';
-  static const auth_thankYouForVerifyingEmail =
-      'auth.thankYouForVerifyingEmail';
+  static const auth_thankYouForVerifyingEmail = 'auth.thankYouForVerifyingEmail';
   static const auth_verifyEmailMessage = 'auth.verifyEmailMessage';
   static const auth_emailNotVerifiedYet = 'auth.emailNotVerifiedYet';
   static const auth_signOutConfirmation = 'auth.signOutConfirmation';
@@ -83,4 +76,5 @@ abstract class LocaleKeys {
   static const apiPage = 'apiPage';
   static const pocketBasePage_menuName = 'pocketBasePage.menuName';
   static const pocketBasePage = 'pocketBasePage';
+
 }

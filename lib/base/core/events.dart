@@ -6,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../configs/routes.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
@@ -15,13 +14,9 @@ import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
 import '../../extensions/repos/auth/classes/auth_user.dart';
 import '../generated/locale/locale_keys.g.dart';
-import '../providers/auth/auth_user_info.dart';
+import '../providers/app/app_user_info.dart';
+import '../providers/app/auth_user_info.dart';
 import 'user.dart';
-
-part '../generated/lib/base/core/events.g.dart';
-
-@Riverpod(keepAlive: true)
-Events events(EventsRef ref) => Events();
 
 class Events {
   afterSignIn(AuthUser authUser, WidgetRef ref) async {

@@ -13,9 +13,9 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
-import '../../base/core/user.dart';
 import '../../base/generated/locale/locale_keys.g.dart';
-import '../../base/providers/auth/auth_user_info.dart';
+import '../../base/providers/app/app_user_info.dart';
+import '../../base/providers/app/auth_user_info.dart';
 import '../../configs/logger.dart';
 import '../../configs/theme.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
