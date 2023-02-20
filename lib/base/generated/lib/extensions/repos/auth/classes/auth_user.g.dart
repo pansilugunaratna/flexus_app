@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../../../../extensions/providers/firebase/auth/models/auth_user.dart';
+part of '../../../../../../../extensions/repos/auth/classes/auth_user.dart';
 
 // **************************************************************************
 // RiverpodGenerator

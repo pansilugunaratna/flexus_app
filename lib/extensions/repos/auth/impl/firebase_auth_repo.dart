@@ -4,10 +4,10 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/firebase/auth/login_type.dart';
-import '../../providers/firebase/auth/models/auth_user.dart';
-import '../../providers/firebase/auth/provider.dart';
-import 'auth_repo.dart';
+import '../classes/login_type.dart';
+import '../classes/auth_user.dart';
+import '../../../providers/firebase/auth/provider.dart';
+import '../auth_repo.dart';
 
 class FirebaseAuthRepo implements AuthRepo {
   FirebaseAuthRepo(this.ref);

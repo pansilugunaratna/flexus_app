@@ -4,9 +4,9 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../login_type.dart';
+import 'login_type.dart';
 
-part '../../../../../base/generated/lib/extensions/providers/firebase/auth/models/auth_user.g.dart';
+part '../../../../base/generated/lib/extensions/repos/auth/classes/auth_user.g.dart';
 
 @Riverpod(keepAlive: true)
 class AuthUserInfo extends _$AuthUserInfo {
