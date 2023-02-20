@@ -22,7 +22,9 @@ import '../../../../configs/configs.dart';
 import '../../../../configs/logger.dart';
 import '../../../repos/auth/classes/auth_user.dart';
 import '../../../repos/auth/classes/login_type.dart';
-import 'user_not_found_exception.dart';
+import '../../../repos/auth/exceptions/auth_exception.dart';
+import '../../../repos/auth/exceptions/generic_auth_exception.dart';
+import '../../../repos/auth/exceptions/user_not_found_exception.dart';
 
 part '../../../../base/generated/lib/extensions/providers/firebase/auth/provider.g.dart';
 
@@ -106,7 +108,7 @@ class FirebaseAuthProvider {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (exception) {
       Log.log.w(exception.toString());
-      _handleFirebaseException(exception);
+      _throwFirebaseException(exception);
     }
   }
 
@@ -152,11 +154,11 @@ class FirebaseAuthProvider {
         });
     } on FirebaseException catch (ex) {
       Log.log.w(ex);
-      _handleFirebaseException(ex);
+      _throwFirebaseException(ex);
       failed(ex);
     } catch (ex) {
       Log.log.w(ex);
-      _handleGenericException(ex);
+      _throwGenericException(ex);
       failed(ex);
     }
   }
@@ -307,17 +309,17 @@ class FirebaseAuthProvider {
 
     if (exception is FirebaseException) {
       Log.log.w(exception.toString());
-      return _handleFirebaseException(exception);
+      return _throwFirebaseException(exception);
     } else if (exception is UserNotFoundExecption) {
       Log.log.w(exception.toString());
       return Exception('User Not Found');
     } else {
       Log.log.w(exception.toString());
-      return _handleGenericException(exception);
+      return _throwGenericException(exception);
     }
   }
 
-  _handleFirebaseException(FirebaseException ex) {
+  _throwFirebaseException(FirebaseException ex) {
     late String message;
     switch (ex.code) {
       case 'user-not-found':
@@ -344,16 +346,11 @@ class FirebaseAuthProvider {
       default:
         message = LocaleKeys.authErrors_signInFailure.tr();
     }
-    return Exception(message);
-    // ref.read(dialogsProvider).showOKDialog(context,
-    //     message: message, title: LocaleKeys.appName.tr());
+    return AuthException(message);
   }
 
-  _handleGenericException(Object exception) {
-    return Exception(exception.toString());
-    // ref.read(dialogsProvider).showOKDialog(context,
-    //     message: LocaleKeys.authErrors_signInFailure.tr(),
-    //     title: LocaleKeys.appName.tr());
+  _throwGenericException(Object exception) {
+    return GenericAuthException(exception.toString());
   }
 
   Future<String> _addImageToStorage(String path, File photo) async {

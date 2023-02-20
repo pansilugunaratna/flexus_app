@@ -17,6 +17,7 @@ import '../../base/generated/locale/locale_keys.g.dart';
 import '../../configs/logger.dart';
 import '../../configs/routes.dart';
 import '../../configs/theme.dart';
+import '../../extensions/providers/dialogs/auth_exceptions/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
 import '../../extensions/providers/ui/provider.dart';
 import '../../extensions/repos/auth/auth_repo.dart';
@@ -191,9 +192,9 @@ _signUpWithSocialAuth(
       events.afterSignIn(authUser, ref);
       context.push(Routes.emailConfirmationPage);
     }
-  }).onError((error, stackTrace) {
+  }).onError((ex, stackTrace) {
     ref.read(_isLoading.notifier).state = false;
-    //TODO: Show error dialog
+    ref.read(authExceptionDialogsProvider).showExceptionMessage(context, ex);
   });
 }
 
@@ -222,9 +223,9 @@ _signUpWithButton(
         events.afterSignIn(authUser, ref);
         context.push(Routes.emailConfirmationPage);
       }
-    }).onError((error, stackTrace) {
+    }).onError((ex, stackTrace) {
       ref.read(_isLoading.notifier).state = false;
-      //TODO: Show error dialog
+      ref.read(authExceptionDialogsProvider).showExceptionMessage(context, ex);
     });
   } else {
     Log.log.w('Sign up form validation failed');
