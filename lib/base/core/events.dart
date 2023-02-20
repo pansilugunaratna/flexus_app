@@ -12,11 +12,11 @@ import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
 import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
-import '../../extensions/repos/auth/classes/auth_user.dart';
 import '../generated/locale/locale_keys.g.dart';
+import '../models/app_user.dart';
+import '../models/auth_user.dart';
 import '../providers/app/app_user_info.dart';
 import '../providers/app/auth_user_info.dart';
-import 'user.dart';
 
 class Events {
   afterSignIn(AuthUser authUser, WidgetRef ref) async {

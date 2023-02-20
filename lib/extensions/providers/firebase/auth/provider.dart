@@ -18,10 +18,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../../../base/generated/locale/locale_keys.g.dart';
+import '../../../../base/models/auth_user.dart';
 import '../../../../configs/configs.dart';
 import '../../../../configs/logger.dart';
-import '../../../repos/auth/classes/auth_user.dart';
-import '../../../repos/auth/classes/login_type.dart';
+import '../../../repos/auth/enums/login_type.dart';
 import '../../../repos/auth/exceptions/auth_exception.dart';
 import '../../../repos/auth/exceptions/generic_auth_exception.dart';
 import '../../../repos/auth/exceptions/user_not_found_exception.dart';

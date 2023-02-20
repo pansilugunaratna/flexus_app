@@ -4,8 +4,8 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'classes/auth_user.dart';
-import 'classes/login_type.dart';
+import '../../../base/models/auth_user.dart';
+import 'enums/login_type.dart';
 import 'impl/firebase_auth_repo.dart';
 
 part '../../../base/generated/lib/extensions/repos/auth/auth_repo.g.dart';

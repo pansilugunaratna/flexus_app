@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../core/user.dart';
+import '../../models/app_user.dart';
 
 part '../../generated/lib/base/providers/app/app_user_info.g.dart';
 

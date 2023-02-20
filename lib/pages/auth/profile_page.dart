@@ -24,7 +24,7 @@ import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
 import '../../extensions/providers/ui/circular_avatar.dart';
 import '../../extensions/providers/ui/provider.dart';
-import '../../extensions/repos/auth/classes/login_type.dart';
+import '../../extensions/repos/auth/enums/login_type.dart';
 import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_dropdown.dart';
 import 'widgets/auth_text_box.dart';

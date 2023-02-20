@@ -21,7 +21,7 @@ import '../../extensions/providers/dialogs/auth_exceptions/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
 import '../../extensions/providers/ui/provider.dart';
 import '../../extensions/repos/auth/auth_repo.dart';
-import '../../extensions/repos/auth/classes/login_type.dart';
+import '../../extensions/repos/auth/enums/login_type.dart';
 import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_button.dart';
 import 'widgets/auth_text_box.dart';
