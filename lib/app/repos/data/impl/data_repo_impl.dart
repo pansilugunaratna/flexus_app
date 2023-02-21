@@ -4,12 +4,12 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/posts/posts.dart';
-import '../../providers/app/pocketbase.dart';
-import 'data_repo.dart';
+import '../../../models/posts/posts.dart';
+import '../../../pb/provider.dart';
+import '../data_repo.dart';
 
-class PBDataRepo implements DataRepo {
-  PBDataRepo(this.ref);
+class DataRepoImpl implements DataRepo {
+  DataRepoImpl(this.ref);
 
   final ProviderRef ref;
 
