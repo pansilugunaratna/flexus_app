@@ -25,9 +25,13 @@ class ThemeConfigs {
   static const pd10x = 120.0;
 
   static var lightTheme = FlexThemeData.light(
+    useMaterial3: true,
     colorScheme: FlexThemeData.light(scheme: theme).colorScheme.copyWith(),
     scheme: theme,
   );
-  static var darkTheme =
-      FlexThemeData.dark(scheme: FlexScheme.rosewood, useMaterial3: true);
+  static var darkTheme = FlexThemeData.dark(
+    useMaterial3: true,
+    colorScheme: FlexThemeData.light(scheme: theme).colorScheme.copyWith(),
+    scheme: theme,
+  );
 }
