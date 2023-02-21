@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/models/posts/posts.dart';
-import '../../app/repos/data/repo.dart';
+import '../../app/repos/data/data_repo.dart';
 import '../../base/generated/locale/locale_keys.g.dart';
 
 final _postsProvider = FutureProvider.autoDispose<Posts>(

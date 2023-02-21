@@ -5,8 +5,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/posts/posts.dart';
-import '../../pb/client.dart';
-import 'repo.dart';
+import '../../providers/app/pocketbase.dart';
+import 'data_repo.dart';
 
 class PBDataRepo implements DataRepo {
   PBDataRepo(this.ref);

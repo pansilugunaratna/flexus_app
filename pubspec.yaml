@@ -53,6 +53,10 @@ dependencies:
   #PocketBase
   pocketbase: ^0.7.2
 
+  #ObjectBox
+  objectbox: ^1.7.2
+  objectbox_flutter_libs: ^1.7.2
+
   #Extension Firebase
 
   #Firebase Core
@@ -101,10 +105,16 @@ dev_dependencies:
 
   #Validator
   dependency_validator: ^3.0.0
+
+  #ObjectBox
+  objectbox_generator: any
   
 
 flutter_gen:
   output: lib/base/generated/assets
+
+objectbox:
+  output_dir: base/generated/objectbox
 
 flutter:
   uses-material-design: true

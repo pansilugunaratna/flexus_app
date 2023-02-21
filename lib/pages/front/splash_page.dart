@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../configs/routes.dart';
 import '../../app/providers/app/events.dart';
-import '../../app/repos/data/repo.dart';
+import '../../app/repos/data/data_repo.dart';
 import '../../base/generated/assets/assets.gen.dart';
 import '../../configs/configs.dart';
 import '../../configs/theme.dart';

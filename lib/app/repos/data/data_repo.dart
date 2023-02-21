@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/posts/posts.dart';
 import 'pb_data_repo.dart';
 
-part '../../../base/generated/lib/app/repos/data/repo.g.dart';
+part '../../../base/generated/lib/app/repos/data/data_repo.g.dart';
 
 @Riverpod(keepAlive: true)
 DataRepo dataRepo(DataRepoRef ref) => PBDataRepo(ref);

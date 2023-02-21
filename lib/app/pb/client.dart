@@ -3,18 +3,9 @@
 // found in the LICENSE file.
 
 import 'package:pocketbase/pocketbase.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../configs/logger.dart';
-import '../../configs/pb.dart';
 import '../models/posts/posts.dart';
-
-part '../../base/generated/lib/app/pb/client.g.dart';
-
-@Riverpod(keepAlive: true)
-PBClient pb(PbRef ref) {
-  return PBClient(PBConfig.baseURL, PBConfig.user, PBConfig.pass);
-}
 
 class PBClient {
   final String baseUrl;
