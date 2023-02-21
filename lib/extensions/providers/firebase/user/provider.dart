@@ -6,9 +6,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../app/providers/app/auth_user_info.dart';
 import '../../../../base/models/app_user.dart';
 import '../../../../base/models/auth_user.dart';
-import '../../../../base/providers/app/auth_user_info.dart';
 import '../../../../configs/logger.dart';
 
 part '../../../../base/generated/lib/extensions/providers/firebase/user/provider.g.dart';

@@ -5,10 +5,10 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../../app/providers/app/auth_user_info.dart';
+import '../../../app/providers/app/events.dart';
 import '../../../base/generated/assets/assets.gen.dart';
 import '../../../base/generated/locale/locale_keys.g.dart';
-import '../../../base/providers/app/auth_user_info.dart';
-import '../../../base/providers/app/events.dart';
 import '../../../configs/routes.dart';
 import '../../../extensions/providers/ui/circular_avatar.dart';
 import '../../auth/profile_page.dart';

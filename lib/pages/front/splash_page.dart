@@ -8,9 +8,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../configs/routes.dart';
+import '../../app/providers/app/events.dart';
 import '../../app/repos/data/repo.dart';
 import '../../base/generated/assets/assets.gen.dart';
-import '../../base/providers/app/events.dart';
 import '../../configs/configs.dart';
 import '../../configs/theme.dart';
 import '../../extensions/repos/auth/auth_repo.dart';

@@ -13,7 +13,7 @@ import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../base/generated/assets/assets.gen.dart';
 import '../../base/generated/locale/locale_keys.g.dart';
-import '../../base/providers/app/events.dart';
+import '../../app/providers/app/events.dart';
 import '../../configs/logger.dart';
 import '../../configs/routes.dart';
 import '../../configs/theme.dart';
