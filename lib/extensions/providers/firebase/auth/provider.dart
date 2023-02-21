@@ -10,9 +10,7 @@ import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -119,48 +117,31 @@ class FirebaseAuthProvider {
     Log.log.i('User sign out success');
   }
 
-  Future<void> updateUserInfo(
-      BuildContext context, WidgetRef ref, LoginType loginType,
-      {required OnUserProfileUpdateSuccess success,
-      required OnUserProfileUpdateFailed failed,
-      String? name,
-      String? password,
-      File? photo}) async {
-    try {
-      Log.log.i('Updating user info');
+  Future<AuthUser> updateUserInfo(
+      LoginType loginType, String? name, String? password, File? photo) async {
+    Log.log.i('Updating user info');
 
-      User user = FirebaseAuth.instance.currentUser!..reload();
+    User user = FirebaseAuth.instance.currentUser!..reload();
 
-      if (password != null && password.isNotEmpty) {
-        await user.updatePassword(password);
-        Log.log.i('Password saved successful');
-      }
-
-      if (photo != null && photo.path != '') {
-        String photoUrl =
-            await _addImageToStorage('user/profile/${user.uid}.jpg', photo);
-        await user.updatePhotoURL(photoUrl);
-        Log.log.i('Photo saved successful');
-      }
-
-      if (name != null && name.isNotEmpty) {
-        await user.updateDisplayName(name);
-        Log.log.i('Name saved successful');
-      }
-      user = FirebaseAuth.instance.currentUser!
-        ..reload().then((value) async {
-          AuthUser authUser = await _getAuthUser(loginType, user);
-          success(authUser);
-        });
-    } on FirebaseException catch (ex) {
-      Log.log.w(ex);
-      _throwFirebaseException(ex);
-      failed(ex);
-    } catch (ex) {
-      Log.log.w(ex);
-      _throwGenericException(ex);
-      failed(ex);
+    if (password != null && password.isNotEmpty) {
+      await user.updatePassword(password);
+      Log.log.i('Password saved successful');
     }
+
+    if (photo != null && photo.path != '') {
+      String photoUrl =
+          await _addImageToStorage('user/profile/${user.uid}.jpg', photo);
+      await user.updatePhotoURL(photoUrl);
+      Log.log.i('Photo saved successful');
+    }
+
+    if (name != null && name.isNotEmpty) {
+      await user.updateDisplayName(name);
+      Log.log.i('Name saved successful');
+    }
+    user = FirebaseAuth.instance.currentUser!..reload();
+    AuthUser authUser = await _getAuthUser(loginType, user);
+    return authUser;
   }
 
   Future<AuthUser> _signInWithGoogle() async {

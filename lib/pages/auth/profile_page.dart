@@ -20,10 +20,9 @@ import '../../configs/logger.dart';
 import '../../configs/theme.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
-import '../../extensions/providers/firebase/user/provider.dart';
 import '../../extensions/providers/ui/circular_avatar.dart';
 import '../../extensions/providers/ui/provider.dart';
+import '../../extensions/repos/auth/auth_repo.dart';
 import '../../extensions/repos/auth/enums/login_type.dart';
 import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_dropdown.dart';
@@ -197,23 +196,25 @@ _readPhoto(BuildContext context, WidgetRef ref) async {
 _onProfileDataSave(GlobalKey<FormBuilderState> formKey, BuildContext context,
     WidgetRef ref) async {
   final authUser = ref.read(authUserInfoProvider);
-  final firebaseAuth = ref.read(firebaseAuthProvider);
   Log.log.i('Profile Save clicked');
   if (formKey.currentState!.validate()) {
     Log.log.i('Profile Save form validation success');
     ref.read(_isLoading.notifier).state = true;
     var name = formKey.currentState!.fields['name']?.value;
     var password = formKey.currentState!.fields['password']?.value;
-    firebaseAuth.updateUserInfo(context, ref, authUser.loginType!,
-        success: (user) async {
-      _onAppProfileDataSave(formKey, context, ref);
-      ref.read(authUserInfoProvider.notifier).state = user;
-    }, failed: (ex) {
+    String gender = formKey.currentState?.fields['gender']?.value;
+    ref
+        .read(authRepoProvider)
+        .updateUserInfo(authUser.loginType!, name, password,
+            File(ref.read(profilePhotoProvider)), gender)
+        .then((authUser) {
+      ref.read(authUserInfoProvider.notifier).state = authUser;
+      final appUser = ref.read(appUserInfoProvider);
+      appUser.gender = gender;
+      Navigator.of(context).pop();
+    }).onError((error, stackTrace) {
       ref.read(_isLoading.notifier).state = false;
-    },
-        name: name,
-        password: password,
-        photo: File(ref.read(profilePhotoProvider)));
+    });
   } else {
     ref.read(_isLoading.notifier).state = false;
     Log.log.w('Profile Save form validation failed');
@@ -268,19 +269,4 @@ class ImageSourceFragment extends ConsumerWidget {
       ],
     );
   }
-}
-
-_onAppProfileDataSave(GlobalKey<FormBuilderState> formKey, BuildContext context,
-    WidgetRef ref) async {
-  String gender = formKey.currentState?.fields['gender']?.value;
-  final firebaseUser = ref.read(firebaseUserProvider);
-  final appUser = ref.read(appUserInfoProvider);
-
-  await firebaseUser.saveAppUser(context, ref, success: () {
-    appUser.gender = gender;
-    Navigator.of(context).pop();
-  }, failed: () {
-    Log.log.w('Saving user data failed');
-  }, gender: gender);
-  ref.read(_isLoading.notifier).state = false;
 }

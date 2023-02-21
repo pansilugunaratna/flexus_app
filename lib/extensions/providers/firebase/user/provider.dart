@@ -3,11 +3,11 @@
 // found in the LICENSE file.
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../base/models/app_user.dart';
+import '../../../../base/models/auth_user.dart';
 import '../../../../base/providers/app/auth_user_info.dart';
 import '../../../../configs/logger.dart';
 
@@ -20,27 +20,17 @@ FirebaseUserProvider firebaseUser(FirebaseUserRef ref) =>
 class FirebaseUserProvider {
   final userCollection = 'users';
 
-  Future<void> saveAppUser(BuildContext context, WidgetRef ref,
-      {String? gender,
-      required Function success,
-      required Function failed}) async {
-    final authUser = ref.read(authUserInfoProvider);
-    try {
-      var values = <String, dynamic>{};
+  Future<void> saveAppUser(AuthUser authUser, String? gender) async {
+    var values = <String, dynamic>{};
 
-      if (gender != null) {
-        values['gender'] = gender;
-      }
-
-      await FirebaseFirestore.instance
-          .collection(userCollection)
-          .doc(authUser.id)
-          .set(values);
-      success();
-    } catch (ex) {
-      Log.log.e(ex);
-      failed();
+    if (gender != null) {
+      values['gender'] = gender;
     }
+
+    await FirebaseFirestore.instance
+        .collection(userCollection)
+        .doc(authUser.id)
+        .set(values);
   }
 
   Future<AppUser> getAppUser(AppUser appUser, WidgetRef ref) async {
