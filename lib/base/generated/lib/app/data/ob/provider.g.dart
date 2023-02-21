@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../app/pb/provider.dart';
+part of '../../../../../../app/data/ob/provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$pbHash() => r'ce1aa684ab90b32e2dc27732ce18ef5f732bd11d';
+String _$obHash() => r'cfb0debfda9af33f8375128c271ad6995d74d7e7';
 
-/// See also [pb].
-final pbProvider = Provider<PBClient>(
-  pb,
-  name: r'pbProvider',
+/// See also [ob].
+final obProvider = Provider<ObjectBox>(
+  ob,
+  name: r'obProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$pbHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$obHash,
 );
-typedef PbRef = ProviderRef<PBClient>;
+typedef ObRef = ProviderRef<ObjectBox>;

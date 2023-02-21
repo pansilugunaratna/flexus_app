@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../configs/pb.dart';
+import '../../../../configs/pb.dart';
 import 'client.dart';
 
-part '../../base/generated/lib/app/pb/provider.g.dart';
+part '../../../base/generated/lib/app/data/pb/provider.g.dart';
 
 @Riverpod(keepAlive: true)
 PBClient pb(PbRef ref) {

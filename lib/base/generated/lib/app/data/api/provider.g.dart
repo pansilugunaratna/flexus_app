@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../../app/repos/data/provider.dart';
+part of '../../../../../../app/data/api/provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$dataRepoHash() => r'b8a971ea1ad3fb9b546ac685bdfefca3929ae7b0';
+String _$apiHash() => r'6f6305c1679fe57df99a5e3fa37a87e550b24fe2';
 
-/// See also [dataRepo].
-final dataRepoProvider = Provider<DataRepo>(
-  dataRepo,
-  name: r'dataRepoProvider',
+/// See also [api].
+final apiProvider = Provider<RestClient>(
+  api,
+  name: r'apiProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$dataRepoHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$apiHash,
 );
-typedef DataRepoRef = ProviderRef<DataRepo>;
+typedef ApiRef = ProviderRef<RestClient>;

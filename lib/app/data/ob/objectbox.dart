@@ -1,4 +1,4 @@
-import '../../base/generated/objectbox/objectbox.g.dart';
+import '../../../base/generated/objectbox/objectbox.g.dart';
 import 'entities/post_entity.dart';
 
 class ObjectBox {

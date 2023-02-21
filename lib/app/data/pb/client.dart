@@ -4,7 +4,7 @@
 
 import 'package:pocketbase/pocketbase.dart';
 
-import '../../configs/logger.dart';
+import '../../../configs/logger.dart';
 import '../models/posts/posts.dart';
 
 class PBClient {

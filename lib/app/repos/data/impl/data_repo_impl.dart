@@ -4,8 +4,8 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../models/posts/posts.dart';
-import '../../../pb/provider.dart';
+import '../../../data/models/posts/posts.dart';
+import '../../../data/pb/provider.dart';
 import '../data_repo.dart';
 
 class DataRepoImpl implements DataRepo {
