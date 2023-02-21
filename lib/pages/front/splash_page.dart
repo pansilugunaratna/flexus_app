@@ -13,7 +13,7 @@ import '../../app/repos/data/provider.dart';
 import '../../base/generated/assets/assets.gen.dart';
 import '../../configs/configs.dart';
 import '../../configs/theme.dart';
-import '../../extensions/repos/auth/auth_repo.dart';
+import '../../extensions/repos/auth/provider.dart';
 import '../../extensions/widgets/app_page.dart';
 
 class SplashPage extends ConsumerWidget {

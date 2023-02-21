@@ -13,7 +13,7 @@ import '../../configs/routes.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
-import '../../extensions/repos/auth/auth_repo.dart';
+import '../../extensions/repos/auth/provider.dart';
 import '../generated/locale/locale_keys.g.dart';
 import '../models/app_user.dart';
 import '../models/auth_user.dart';

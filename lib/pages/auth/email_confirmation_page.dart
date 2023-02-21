@@ -15,7 +15,7 @@ import '../../configs/logger.dart';
 import '../../configs/routes.dart';
 import '../../configs/theme.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
-import '../../extensions/repos/auth/auth_repo.dart';
+import '../../extensions/repos/auth/provider.dart';
 import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_button.dart';
 
