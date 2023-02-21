@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../core/events.dart';
+import '../../../base/core/events.dart';
 
-part '../../generated/lib/base/providers/app/events.g.dart';
+part '../../../base/generated/lib/app/providers/app/events.g.dart';
 
 @Riverpod(keepAlive: true)
 Events events(EventsRef ref) => Events();

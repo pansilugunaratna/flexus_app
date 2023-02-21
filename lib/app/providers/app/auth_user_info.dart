@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/auth_user.dart';
+import '../../../base/models/auth_user.dart';
 
-part '../../generated/lib/base/providers/app/auth_user_info.g.dart';
+part '../../../base/generated/lib/app/providers/app/auth_user_info.g.dart';
 
 @Riverpod(keepAlive: true)
 class AuthUserInfo extends _$AuthUserInfo {

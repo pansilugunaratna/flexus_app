@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../providers/app/auth_user_info.dart';
+part of '../../../../../../app/providers/app/events.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$AuthUserInfoHash() => r'c7a69b9f7876c4b90c1b50239d42e7b250ae7fad';
+String _$eventsHash() => r'706281c8a949e44fa83fbd95b3c860a90a0a511e';
 
-/// See also [AuthUserInfo].
-final authUserInfoProvider = NotifierProvider<AuthUserInfo, AuthUser>(
-  AuthUserInfo.new,
-  name: r'authUserInfoProvider',
+/// See also [events].
+final eventsProvider = Provider<Events>(
+  events,
+  name: r'eventsProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$AuthUserInfoHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$eventsHash,
 );
-typedef AuthUserInfoRef = NotifierProviderRef<AuthUser>;
-
-abstract class _$AuthUserInfo extends Notifier<AuthUser> {
-  @override
-  AuthUser build();
-}
+typedef EventsRef = ProviderRef<Events>;
