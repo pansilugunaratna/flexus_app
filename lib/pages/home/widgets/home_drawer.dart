@@ -84,7 +84,8 @@ class HomeDrawer extends ConsumerWidget {
             alignment: FractionalOffset.bottomCenter,
             child: Column(
               children: [
-                Assets.images.app.logoLong.image(width: 96.0),
+                Assets.images.app.logoLong.image(
+                    width: 96.0, color: Theme.of(context).colorScheme.primary),
                 Text(
                   'version: ${ref.watch(_version).value}',
                   style: GoogleFonts.abel(color: Colors.grey),
