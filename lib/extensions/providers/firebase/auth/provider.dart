@@ -110,10 +110,8 @@ class FirebaseAuthProvider {
     }
   }
 
-  void signOutFromAll(OnSignOut onSignOut) {
-    FirebaseAuth.instance.signOut().then((it) {
-      onSignOut();
-    });
+  Future<void> signOutFromAll() async {
+    await FirebaseAuth.instance.signOut();
     Log.log.i('User sign out success');
   }
 

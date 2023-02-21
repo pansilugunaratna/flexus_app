@@ -61,4 +61,9 @@ class FirebaseAuthRepo implements AuthRepo {
     await ref.read(firebaseUserProvider).saveAppUser(authUser, gender);
     return authUser;
   }
+
+  @override
+  Future<void> signOutFromAll() async {
+    return ref.read(firebaseAuthProvider).signOutFromAll();
+  }
 }

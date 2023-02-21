@@ -10,8 +10,8 @@ import 'package:go_router/go_router.dart';
 import '../../configs/routes.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
+import '../../extensions/repos/auth/auth_repo.dart';
 import '../generated/locale/locale_keys.g.dart';
 import '../models/app_user.dart';
 import '../models/auth_user.dart';
@@ -33,7 +33,7 @@ class Events {
         onNoPressed: () => Navigator.of(context).pop(),
         onYesPressed: () {
           Navigator.of(context).pop();
-          ref.read(firebaseAuthProvider).signOutFromAll(() {
+          ref.read(authRepoProvider).signOutFromAll().then((value) {
             ref.invalidate(authUserInfoProvider);
             ref.invalidate(appUserInfoProvider);
             context.go(Routes.splashPage);
