@@ -6,21 +6,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../configs/routes.dart';
-import '../generated/locale/locale_keys.g.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
-import '../../extensions/providers/firebase/auth/models/auth_user.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
-import 'user.dart';
-
-part '../generated/lib/base/core/events.g.dart';
-
-@Riverpod(keepAlive: true)
-Events events(EventsRef ref) => Events();
+import '../../extensions/repos/auth/auth_repo.dart';
+import '../generated/locale/locale_keys.g.dart';
+import '../models/app_user.dart';
+import '../models/auth_user.dart';
+import '../providers/app/app_user_info.dart';
+import '../providers/app/auth_user_info.dart';
 
 class Events {
   afterSignIn(AuthUser authUser, WidgetRef ref) async {
@@ -37,7 +33,7 @@ class Events {
         onNoPressed: () => Navigator.of(context).pop(),
         onYesPressed: () {
           Navigator.of(context).pop();
-          ref.read(firebaseAuthProvider).signOutFromAll(() {
+          ref.read(authRepoProvider).signOutFromAll().then((value) {
             ref.invalidate(authUserInfoProvider);
             ref.invalidate(appUserInfoProvider);
             context.go(Routes.splashPage);

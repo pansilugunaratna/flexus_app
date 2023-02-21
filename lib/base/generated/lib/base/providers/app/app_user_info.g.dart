@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../core/events.dart';
+part of '../../../../../providers/app/app_user_info.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,13 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$eventsHash() => r'706281c8a949e44fa83fbd95b3c860a90a0a511e';
+String _$AppUserInfoHash() => r'9f901a6e733282664498563d36a2f5dbded057b7';
 
-/// See also [events].
-final eventsProvider = Provider<Events>(
-  events,
-  name: r'eventsProvider',
+/// See also [AppUserInfo].
+final appUserInfoProvider = NotifierProvider<AppUserInfo, AppUser>(
+  AppUserInfo.new,
+  name: r'appUserInfoProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$eventsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$AppUserInfoHash,
 );
-typedef EventsRef = ProviderRef<Events>;
+typedef AppUserInfoRef = NotifierProviderRef<AppUser>;
+
+abstract class _$AppUserInfo extends Notifier<AppUser> {
+  @override
+  AppUser build();
+}

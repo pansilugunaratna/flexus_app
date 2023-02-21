@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../core/user.dart';
+part of '../../../../../providers/app/auth_user_info.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$AppUserInfoHash() => r'9f901a6e733282664498563d36a2f5dbded057b7';
+String _$AuthUserInfoHash() => r'c7a69b9f7876c4b90c1b50239d42e7b250ae7fad';
 
-/// See also [AppUserInfo].
-final appUserInfoProvider = NotifierProvider<AppUserInfo, AppUser>(
-  AppUserInfo.new,
-  name: r'appUserInfoProvider',
+/// See also [AuthUserInfo].
+final authUserInfoProvider = NotifierProvider<AuthUserInfo, AuthUser>(
+  AuthUserInfo.new,
+  name: r'authUserInfoProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$AppUserInfoHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$AuthUserInfoHash,
 );
-typedef AppUserInfoRef = NotifierProviderRef<AppUser>;
+typedef AuthUserInfoRef = NotifierProviderRef<AuthUser>;
 
-abstract class _$AppUserInfo extends Notifier<AppUser> {
+abstract class _$AuthUserInfo extends Notifier<AuthUser> {
   @override
-  AppUser build();
+  AuthUser build();
 }

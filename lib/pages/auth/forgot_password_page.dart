@@ -16,8 +16,8 @@ import '../../base/generated/locale/locale_keys.g.dart';
 import '../../configs/logger.dart';
 import '../../configs/theme.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
 import '../../extensions/providers/ui/provider.dart';
+import '../../extensions/repos/auth/auth_repo.dart';
 import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_button.dart';
 import 'widgets/auth_text_box.dart';
@@ -93,12 +93,11 @@ class ForgotPasswordPage extends ConsumerWidget {
 
 _resetPassword(GlobalKey<FormBuilderState> formKey, BuildContext context,
     WidgetRef ref) async {
-  final firebaseAuth = ref.read(firebaseAuthProvider);
   if (formKey.currentState!.validate()) {
     Log.log.i('Sign in form validation success');
     var email = formKey.currentState!.fields['email']?.value;
     ref.read(_isLoading.notifier).state = true;
-    await firebaseAuth.resetPassword(context, ref, email, resetSuccess: () {
+    ref.read(authRepoProvider).resetPassword(email).then((authUser) {
       ref.read(_isLoading.notifier).state = false;
       ref.read(dialogsProvider).showOKDialog(context,
           message: LocaleKeys.auth_resetPasswordSuccess.tr(),
@@ -106,7 +105,7 @@ _resetPassword(GlobalKey<FormBuilderState> formKey, BuildContext context,
         context.pop();
         context.pop();
       });
-    }, resetFailed: () {
+    }).onError((error, stackTrace) {
       ref.read(_isLoading.notifier).state = false;
     });
   }

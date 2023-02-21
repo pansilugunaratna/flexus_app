@@ -10,20 +10,19 @@ import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../../../../base/generated/locale/locale_keys.g.dart';
+import '../../../../base/models/auth_user.dart';
 import '../../../../configs/configs.dart';
 import '../../../../configs/logger.dart';
-import '../../../../base/generated/locale/locale_keys.g.dart';
-import '../../dialogs/common/provider.dart';
-import 'login_type.dart';
-import 'models/auth_user.dart';
-import 'user_not_found_exception.dart';
+import '../../../repos/auth/enums/login_type.dart';
+import '../../../repos/auth/exceptions/auth_exception.dart';
+import '../../../repos/auth/exceptions/generic_auth_exception.dart';
+import '../../../repos/auth/exceptions/user_not_found_exception.dart';
 
 part '../../../../base/generated/lib/extensions/providers/firebase/auth/provider.g.dart';
 
@@ -32,76 +31,63 @@ FirebaseAuthProvider firebaseAuth(FirebaseAuthRef ref) =>
     FirebaseAuthProvider();
 
 class FirebaseAuthProvider {
-  loginWithSocialAuth(BuildContext context, WidgetRef ref, LoginType loginType,
-      {required OnAuthSuccess success,
-      required OnAuthSuccessAndEmailToVerify emailToVerify,
-      required OnAuthFailed failed}) async {
+  Future<AuthUser> loginWithSocialAuth(LoginType loginType) async {
     Log.log.i('Login with ${loginType.toString()} clicked');
     switch (loginType) {
       case LoginType.facebook:
-        await _signInWithFacebook(context, ref, loginType, success, failed);
-        break;
+        return await _signInWithFacebook();
       case LoginType.google:
-        await _signInWithGoogle(context, ref, loginType, success, failed);
-        break;
+        return await _signInWithGoogle();
       case LoginType.apple:
-        await _signInWithApple(context, ref, loginType, success, failed);
-        break;
+        return await _signInWithApple();
       default:
         Log.log.w('Invalid social login type');
+        throw Exception('Invalid social login type');
     }
   }
 
-  signInWithEmail(
-      BuildContext context, WidgetRef ref, String email, String password,
-      {required OnAuthSuccess success,
-      required OnAuthSuccessAndEmailToVerify emailToVerify,
-      required OnAuthFailed failed}) async {
+  Future<AuthUser> signInWithEmail(String email, String password) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user!;
-      _onAuthSuccess(LoginType.email, success, emailToVerify, user);
+      return _onAuthSuccess(LoginType.email, user);
     } on FirebaseAuthException catch (ex) {
-      _onAuthFailed(context, ref, LoginType.email, failed, ex);
+      throw _onAuthFailed(LoginType.email, ex);
     } catch (ex) {
-      _onAuthFailed(context, ref, LoginType.email, failed, ex);
+      throw _onAuthFailed(LoginType.email, ex);
     }
   }
 
-  signUpWithEmail(BuildContext context, WidgetRef ref, String name,
-      String email, String password,
-      {required OnAuthSuccess success,
-      required OnAuthSuccessAndEmailToVerify emailToVerify,
-      required OnAuthFailed failed}) async {
+  Future<AuthUser> signUpWithEmail(
+    String name,
+    String email,
+    String password,
+  ) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user!;
       await user.updateDisplayName(name);
-      _onAuthSuccess(LoginType.email, success, emailToVerify, user);
+      return _onAuthSuccess(LoginType.email, user);
     } on FirebaseAuthException catch (ex) {
-      _onAuthFailed(context, ref, LoginType.email, failed, ex);
+      throw _onAuthFailed(LoginType.email, ex);
     } catch (ex) {
-      _onAuthFailed(context, ref, LoginType.email, failed, ex);
+      throw _onAuthFailed(LoginType.email, ex);
     }
   }
 
-  autoSignUserIn(BuildContext context, WidgetRef ref,
-      {required OnAuthSuccess success,
-      required OnAuthSuccessAndEmailToVerify emailToVerify,
-      required OnAuthFailed failed}) async {
+  Future<AuthUser> autoSignUserIn() async {
     try {
       FirebaseAuth.instance.currentUser?.reload();
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        _onAuthSuccess(LoginType.auto, success, emailToVerify, user);
+        return _onAuthSuccess(LoginType.auto, user);
       } else {
-        _onAuthFailed(context, ref, LoginType.auto, failed,
-            UserNotFoundExecption('User not found'));
+        throw UserNotFoundExecption('User not found');
       }
     } catch (ex) {
-      _onAuthFailed(context, ref, LoginType.email, failed, ex);
+      throw _onAuthFailed(LoginType.auto, ex);
     }
   }
 
@@ -115,71 +101,49 @@ class FirebaseAuthProvider {
     }
   }
 
-  Future<void> resetPassword(BuildContext context, WidgetRef ref, String email,
-      {required Function resetSuccess, required Function resetFailed}) async {
+  Future<void> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      resetSuccess();
     } on FirebaseAuthException catch (exception) {
       Log.log.w(exception.toString());
-      _handleFirebaseException(context, ref, exception);
-      resetFailed();
+      _throwFirebaseException(exception);
     }
   }
 
-  void signOutFromAll(OnSignOut onSignOut) {
-    FirebaseAuth.instance.signOut().then((it) {
-      onSignOut();
-    });
+  Future<void> signOutFromAll() async {
+    await FirebaseAuth.instance.signOut();
     Log.log.i('User sign out success');
   }
 
-  Future<void> updateUserInfo(
-      BuildContext context, WidgetRef ref, LoginType loginType,
-      {required OnUserProfileUpdateSuccess success,
-      required OnUserProfileUpdateFailed failed,
-      String? name,
-      String? password,
-      File? photo}) async {
-    try {
-      Log.log.i('Updating user info');
+  Future<AuthUser> updateUserInfo(
+      LoginType loginType, String? name, String? password, File? photo) async {
+    Log.log.i('Updating user info');
 
-      User user = FirebaseAuth.instance.currentUser!..reload();
+    User user = FirebaseAuth.instance.currentUser!..reload();
 
-      if (password != null && password.isNotEmpty) {
-        await user.updatePassword(password);
-        Log.log.i('Password saved successful');
-      }
-
-      if (photo != null && photo.path != '') {
-        String photoUrl =
-            await _addImageToStorage('user/profile/${user.uid}.jpg', photo);
-        await user.updatePhotoURL(photoUrl);
-        Log.log.i('Photo saved successful');
-      }
-
-      if (name != null && name.isNotEmpty) {
-        await user.updateDisplayName(name);
-        Log.log.i('Name saved successful');
-      }
-      user = FirebaseAuth.instance.currentUser!
-        ..reload().then((value) async {
-          AuthUser authUser = await _getAuthUser(loginType, user);
-          success(authUser);
-        });
-    } on FirebaseException catch (ex) {
-      Log.log.w(ex);
-      _handleFirebaseException(context, ref, ex);
-      failed(ex);
-    } catch (ex) {
-      Log.log.w(ex);
-      _handleGenericException(context, ref, ex);
-      failed(ex);
+    if (password != null && password.isNotEmpty) {
+      await user.updatePassword(password);
+      Log.log.i('Password saved successful');
     }
+
+    if (photo != null && photo.path != '') {
+      String photoUrl =
+          await _addImageToStorage('user/profile/${user.uid}.jpg', photo);
+      await user.updatePhotoURL(photoUrl);
+      Log.log.i('Photo saved successful');
+    }
+
+    if (name != null && name.isNotEmpty) {
+      await user.updateDisplayName(name);
+      Log.log.i('Name saved successful');
+    }
+    user = FirebaseAuth.instance.currentUser!..reload();
+    AuthUser authUser = await _getAuthUser(loginType, user);
+    return authUser;
   }
 
-  _signInWithGoogle(BuildContext context, WidgetRef ref, LoginType loginType,
-      OnAuthSuccess onAuthSuccess, OnAuthFailed onAuthFailed) async {
+  Future<AuthUser> _signInWithGoogle() async {
+    LoginType loginType = LoginType.google;
     try {
       UserCredential userCredential;
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -192,14 +156,14 @@ class FirebaseAuthProvider {
       userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
       final user = userCredential.user;
-      _onAuthSuccess(loginType, onAuthSuccess, null, user!);
+      return _onAuthSuccess(loginType, user!);
     } catch (ex) {
-      _onAuthFailed(context, ref, loginType, onAuthFailed, ex);
+      throw _onAuthFailed(loginType, ex);
     }
   }
 
-  _signInWithFacebook(BuildContext context, WidgetRef ref, LoginType loginType,
-      OnAuthSuccess onAuthSuccess, OnAuthFailed onAuthFailed) async {
+  Future<AuthUser> _signInWithFacebook() async {
+    LoginType loginType = LoginType.facebook;
     try {
       FacebookAuth.instance.login().then((result) async {
         UserCredential userCredential;
@@ -210,28 +174,27 @@ class FirebaseAuthProvider {
             userCredential =
                 await FirebaseAuth.instance.signInWithCredential(credential);
             final user = userCredential.user;
-            _onAuthSuccess(loginType, onAuthSuccess, null, user!);
-            break;
+            return _onAuthSuccess(loginType, user!);
           case LoginStatus.cancelled:
             Log.log.w(result.message);
-            _onAuthFailed(context, ref, loginType, onAuthFailed,
-                Exception('Facebook login is cancelled'));
-            break;
+            throw _onAuthFailed(
+                loginType, Exception('Facebook login is cancelled'));
           case LoginStatus.failed:
             Log.log.e(result.message);
-            _onAuthFailed(context, ref, loginType, onAuthFailed,
-                Exception('Facebook login is failed'));
-            break;
+            throw _onAuthFailed(
+                loginType, Exception('Facebook login is failed'));
           default:
         }
       });
+      throw _onAuthFailed(
+          loginType, Exception('Facebook login is failed (unkown)'));
     } catch (ex) {
-      _onAuthFailed(context, ref, loginType, onAuthFailed, ex);
+      throw _onAuthFailed(loginType, ex);
     }
   }
 
-  _signInWithApple(BuildContext context, WidgetRef ref, LoginType loginType,
-      OnAuthSuccess onAuthSuccess, OnAuthFailed onAuthFailed) async {
+  Future<AuthUser> _signInWithApple() async {
+    LoginType loginType = LoginType.apple;
     try {
       final nonce = _createNonce(32);
       final nativeAppleCred = Platform.isIOS
@@ -268,9 +231,9 @@ class FirebaseAuthProvider {
       User? user =
           (await FirebaseAuth.instance.signInWithCredential(credentialsApple))
               .user;
-      _onAuthSuccess(loginType, onAuthSuccess, null, user!);
+      return _onAuthSuccess(loginType, user!);
     } catch (ex) {
-      _onAuthFailed(context, ref, loginType, onAuthFailed, ex);
+      throw _onAuthFailed(loginType, ex);
     }
   }
 
@@ -308,44 +271,34 @@ class FirebaseAuthProvider {
     return authUser;
   }
 
-  _onAuthSuccess(LoginType loginType, OnAuthSuccess onAuthSuccess,
-      OnAuthSuccessAndEmailToVerify? emailToVerify, User user) async {
+  Future<AuthUser> _onAuthSuccess(LoginType loginType, User user) async {
     AuthUser authUser = await _getAuthUser(loginType, user);
     Log.log.i('Login with ${loginType.toString()} successful');
     Log.log.d(
         'User Data = Name: ${authUser.name}, Email: ${authUser.email}, Email Verified: ${authUser.emailVerified}');
-
-    if (emailToVerify != null) {
-      if (user.emailVerified) {
-        onAuthSuccess(authUser);
-      } else {
-        Log.log.i('Sending verification email');
-        user.sendEmailVerification();
-        emailToVerify(authUser);
-      }
-    } else {
-      onAuthSuccess(authUser);
+    if (!authUser.emailVerified!) {
+      Log.log.i('Sending verification email');
+      user.sendEmailVerification();
     }
+    return authUser;
   }
 
-  _onAuthFailed(BuildContext context, WidgetRef ref, LoginType loginType,
-      OnAuthFailed onAuthFailed, Object exception) {
+  _onAuthFailed(LoginType loginType, Object exception) {
     Log.log.w('Login with ${loginType.toString()} failed');
 
     if (exception is FirebaseException) {
       Log.log.w(exception.toString());
-      _handleFirebaseException(context, ref, exception);
+      return _throwFirebaseException(exception);
     } else if (exception is UserNotFoundExecption) {
       Log.log.w(exception.toString());
+      return Exception('User Not Found');
     } else {
       Log.log.w(exception.toString());
-      _handleGenericException(context, ref, exception);
+      return _throwGenericException(exception);
     }
-    onAuthFailed(exception);
   }
 
-  void _handleFirebaseException(
-      BuildContext context, WidgetRef ref, FirebaseException ex) {
+  _throwFirebaseException(FirebaseException ex) {
     late String message;
     switch (ex.code) {
       case 'user-not-found':
@@ -372,15 +325,11 @@ class FirebaseAuthProvider {
       default:
         message = LocaleKeys.authErrors_signInFailure.tr();
     }
-    ref.read(dialogsProvider).showOKDialog(context,
-        message: message, title: LocaleKeys.appName.tr());
+    return AuthException(message);
   }
 
-  void _handleGenericException(
-      BuildContext context, WidgetRef ref, Object exception) {
-    ref.read(dialogsProvider).showOKDialog(context,
-        message: LocaleKeys.authErrors_signInFailure.tr(),
-        title: LocaleKeys.appName.tr());
+  _throwGenericException(Object exception) {
+    return GenericAuthException(exception.toString());
   }
 
   Future<String> _addImageToStorage(String path, File photo) async {

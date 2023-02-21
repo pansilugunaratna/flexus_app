@@ -2,17 +2,7 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../login_type.dart';
-
-part '../../../../../base/generated/lib/extensions/providers/firebase/auth/models/auth_user.g.dart';
-
-@Riverpod(keepAlive: true)
-class AuthUserInfo extends _$AuthUserInfo {
-  @override
-  AuthUser build() => AuthUser();
-}
+import '../../extensions/repos/auth/enums/login_type.dart';
 
 class AuthUser {
   AuthUser(

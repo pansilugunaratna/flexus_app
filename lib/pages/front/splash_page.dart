@@ -9,11 +9,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../configs/routes.dart';
 import '../../app/repos/data/repo.dart';
-import '../../base/core/events.dart';
 import '../../base/generated/assets/assets.gen.dart';
+import '../../base/providers/app/events.dart';
 import '../../configs/configs.dart';
 import '../../configs/theme.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
+import '../../extensions/repos/auth/auth_repo.dart';
 import '../../extensions/widgets/app_page.dart';
 
 class SplashPage extends ConsumerWidget {
@@ -26,21 +26,17 @@ class SplashPage extends ConsumerWidget {
   _onPageLoad(BuildContext context, WidgetRef ref, int splashScreenDelay) {
     Future.delayed(Duration(seconds: splashScreenDelay), () {
       _initSplash(ref).then((value) {
-        return ref.read(firebaseAuthProvider).autoSignUserIn(
-          context,
-          ref,
-          success: ((authUser) async {
+        ref.read(authRepoProvider).autoSignIn().then((authUser) {
+          if (authUser.emailVerified!) {
             ref.read(eventsProvider).afterSignIn(authUser, ref);
             context.go(Routes.homePage);
-          }),
-          emailToVerify: ((authUser) async {
+          } else {
             ref.read(eventsProvider).afterSignIn(authUser, ref);
             context.go(Routes.emailConfirmationPage);
-          }),
-          failed: ((exception) {
-            context.go(Routes.introPage);
-          }),
-        );
+          }
+        }).onError((error, stackTrace) {
+          context.go(Routes.introPage);
+        });
       });
     });
   }

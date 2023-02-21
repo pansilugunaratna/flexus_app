@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT license that can be
 // found in the LICENSE file.
 
-import '../base/core/build.dart';
+import '../base/enums/build.dart';
 
 class Configs {
   /*App Configs*/

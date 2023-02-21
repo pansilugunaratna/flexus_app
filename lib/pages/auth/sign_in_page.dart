@@ -11,17 +11,18 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
-import '../../base/core/events.dart';
 import '../../base/generated/assets/assets.gen.dart';
 import '../../base/generated/locale/locale_keys.g.dart';
-import '../../extensions/providers/firebase/analytics/provider.dart';
-import '../../extensions/providers/firebase/auth/login_type.dart';
-import '../../extensions/providers/firebase/auth/provider.dart';
-import '../../extensions/providers/ui/provider.dart';
-import '../../extensions/widgets/app_page.dart';
+import '../../base/providers/app/events.dart';
 import '../../configs/logger.dart';
 import '../../configs/routes.dart';
 import '../../configs/theme.dart';
+import '../../extensions/providers/dialogs/auth_exceptions/provider.dart';
+import '../../extensions/providers/firebase/analytics/provider.dart';
+import '../../extensions/providers/ui/provider.dart';
+import '../../extensions/repos/auth/auth_repo.dart';
+import '../../extensions/repos/auth/enums/login_type.dart';
+import '../../extensions/widgets/app_page.dart';
 import 'widgets/auth_button.dart';
 import 'widgets/auth_text_box.dart';
 import 'widgets/social_auth_button.dart';
@@ -159,29 +160,25 @@ _signInWithSocialAuth(
     LoginType loginType, BuildContext context, WidgetRef ref) {
   final events = ref.read(eventsProvider);
   ref.read(_isLoading.notifier).state = true;
-  ref.read(firebaseAuthProvider).loginWithSocialAuth(
-    context,
-    ref,
-    loginType,
-    success: ((authUser) {
+
+  ref.read(authRepoProvider).signInWithSocialLogin(loginType).then((authUser) {
+    if (authUser.emailVerified!) {
       ref.read(_isLoading.notifier).state = false;
       events.afterSignIn(authUser, ref);
       context.go(Routes.homePage);
-    }),
-    emailToVerify: ((authUser) async {
+    } else {
       ref.read(_isLoading.notifier).state = false;
       events.afterSignIn(authUser, ref);
       context.push(Routes.emailConfirmationPage);
-    }),
-    failed: ((exception) {
-      ref.read(_isLoading.notifier).state = false;
-    }),
-  );
+    }
+  }).onError((ex, stackTrace) {
+    ref.read(_isLoading.notifier).state = false;
+    ref.read(authExceptionDialogsProvider).showExceptionMessage(context, ex);
+  });
 }
 
 _signInWithButton(
     GlobalKey<FormBuilderState> formKey, BuildContext context, WidgetRef ref) {
-  final firebaseAuth = ref.read(firebaseAuthProvider);
   final events = ref.read(eventsProvider);
   Log.log.i('Sign in form clicked');
   if (formKey.currentState!.validate()) {
@@ -189,19 +186,23 @@ _signInWithButton(
     var email = formKey.currentState!.fields['email']?.value;
     var password = formKey.currentState!.fields['password']?.value;
     ref.read(_isLoading.notifier).state = true;
-    firebaseAuth.signInWithEmail(context, ref, email, password,
-        success: ((authUser) {
+    ref
+        .read(authRepoProvider)
+        .signInWithEmail(email, password)
+        .then((authUser) {
+      if (authUser.emailVerified!) {
+        ref.read(_isLoading.notifier).state = false;
+        events.afterSignIn(authUser, ref);
+        context.go(Routes.homePage);
+      } else {
+        ref.read(_isLoading.notifier).state = false;
+        events.afterSignIn(authUser, ref);
+        context.push(Routes.emailConfirmationPage);
+      }
+    }).onError((ex, stackTrace) {
       ref.read(_isLoading.notifier).state = false;
-      events.afterSignIn(authUser, ref);
-      context.go(Routes.homePage);
-    }), emailToVerify: ((authUser) {
-      ref.read(_isLoading.notifier).state = false;
-      events.afterSignIn(authUser, ref);
-      context.push(Routes.emailConfirmationPage);
-    }), failed: ((exception) {
-      Log.log.w('Sign in with email not successful');
-      ref.read(_isLoading.notifier).state = false;
-    }));
+      ref.read(authExceptionDialogsProvider).showExceptionMessage(context, ex);
+    });
   } else {
     Log.log.w('Sign in form validation failed');
   }

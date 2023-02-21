@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../../extensions/repo/auth/auth_repo.dart';
+part of '../../../../../providers/app/events.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,13 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$authRepoHash() => r'3ff6b35f594b8d48e19b6c9a68297902bd937454';
+String _$eventsHash() => r'706281c8a949e44fa83fbd95b3c860a90a0a511e';
 
-/// See also [authRepo].
-final authRepoProvider = Provider<AuthRepo>(
-  authRepo,
-  name: r'authRepoProvider',
+/// See also [events].
+final eventsProvider = Provider<Events>(
+  events,
+  name: r'eventsProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authRepoHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$eventsHash,
 );
-typedef AuthRepoRef = ProviderRef<AuthRepo>;
+typedef EventsRef = ProviderRef<Events>;

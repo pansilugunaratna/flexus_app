@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../../../../extensions/providers/firebase/auth/models/auth_user.dart';
+part of '../../../../../../../extensions/providers/dialogs/auth_exceptions/provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,15 @@ class _SystemHash {
   }
 }
 
-String _$AuthUserInfoHash() => r'c7a69b9f7876c4b90c1b50239d42e7b250ae7fad';
+String _$authExceptionDialogsHash() =>
+    r'a1f831add02f575ac43b9a720b732a659cca5d1f';
 
-/// See also [AuthUserInfo].
-final authUserInfoProvider = NotifierProvider<AuthUserInfo, AuthUser>(
-  AuthUserInfo.new,
-  name: r'authUserInfoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$AuthUserInfoHash,
+/// See also [authExceptionDialogs].
+final authExceptionDialogsProvider = Provider<AuthExceptionDialogProvider>(
+  authExceptionDialogs,
+  name: r'authExceptionDialogsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authExceptionDialogsHash,
 );
-typedef AuthUserInfoRef = NotifierProviderRef<AuthUser>;
-
-abstract class _$AuthUserInfo extends Notifier<AuthUser> {
-  @override
-  AuthUser build();
-}
+typedef AuthExceptionDialogsRef = ProviderRef<AuthExceptionDialogProvider>;
