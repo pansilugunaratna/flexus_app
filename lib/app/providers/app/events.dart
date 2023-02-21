@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../base/core/events.dart';
+import '../../core/events.dart';
 
 part '../../../base/generated/lib/app/providers/app/events.g.dart';
 

@@ -7,16 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/providers/app/app_user_info.dart';
-import '../../app/providers/app/auth_user_info.dart';
+import '../providers/app/app_user_info.dart';
+import '../providers/app/auth_user_info.dart';
 import '../../configs/routes.dart';
 import '../../extensions/providers/dialogs/common/provider.dart';
 import '../../extensions/providers/firebase/analytics/provider.dart';
 import '../../extensions/providers/firebase/user/provider.dart';
 import '../../extensions/repos/auth/provider.dart';
-import '../generated/locale/locale_keys.g.dart';
-import '../models/app_user.dart';
-import '../models/auth_user.dart';
+import '../../base/generated/locale/locale_keys.g.dart';
+import '../../base/models/app_user.dart';
+import '../../base/models/auth_user.dart';
 
 class Events {
   afterSignIn(AuthUser authUser, WidgetRef ref) async {
